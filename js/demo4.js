@@ -119,5 +119,13 @@ $(document).ready(function () {
 			displayJsonResult($result, error.responseJSON);
 		});
 	});
+
+	$("#postCode").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        // Do something
+        $('#putCode').empty();
+        $('#putCode').append(document.getElementById('postCode').value);
+    }
+	});
         
 });
