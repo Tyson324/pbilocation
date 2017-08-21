@@ -102,14 +102,22 @@
 };
 $(document).ready(function () {
 
-	
-
-		$.get("http://ipinfo.io", function (response) {
+		$.get("https://ipinfo.io", function (response) {
     	$("#replaceMe").append("Location: " + response.city + ", " + response.region + ", " + response.loc);
    	}, "jsonp");
 
-	
-        
-    
+	$("#geocode-postcode").click(function (event) {
+		event.preventDefault();
+		var $result = $("#geocode-postcode-result"),
+				lon = $("#lon-input").val(),
+				lat = $("#lat-input").val();
+		$.get(encodeURI("postcodes?lon=" + lon +"&lat=" + lat))
+		.done(function (data) {
+			displayJsonResult($result, data);
+		})
+		.fail(function (error) {
+			displayJsonResult($result, error.responseJSON);
+		});
+	});
         
 });
